@@ -3,131 +3,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>My Euro Party Trip 2026</title>
+    <title>Europe Adventure 2026</title>
     <style>
         :root {
-            --beach-sand: #F4E1D2;   /* 沙灘米色 */
-            --ocean-blue: #81C7D4;   /* 海水藍 */
-            --forest-green: #2D5A27;  /* 森林綠 */
-            --night-blue: #1A2634;    /* 深色文字 */
-            --action-orange: #FF8C42; /* 刺激活動標籤 */
+            --beach-sand: #F4E1D2;
+            --ocean-blue: #81C7D4;
+            --forest-green: #2D5A27;
+            --night-blue: #1A2634;
+            --action-orange: #FF8C42;
+            --budget-gold: #D4AF37;
         }
+        body { font-family: -apple-system, sans-serif; background-color: var(--beach-sand); color: var(--night-blue); margin: 0; padding: 15px; }
+        .app-header { text-align: center; padding: 20px 0; border-bottom: 2px solid var(--forest-green); margin-bottom: 20px; }
+        h1 { margin: 0; color: var(--forest-green); font-size: 26px; }
+        
+        .section-title { color: var(--forest-green); border-left: 5px solid var(--action-orange); padding-left: 10px; margin: 25px 0 15px 0; font-size: 20px; }
 
-        body { 
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--beach-sand);
-            color: var(--night-blue);
-            margin: 0;
-            padding: 15px;
-            line-height: 1.5;
-        }
+        /* 行程卡片 */
+        .day-card { background: white; border-radius: 15px; display: flex; margin-bottom: 15px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); min-height: 180px; }
+        .card-left { width: 30%; background-size: cover; background-position: center; background-color: #eee; }
+        .card-right { width: 70%; padding: 15px; }
+        .date-badge { background: var(--forest-green); color: white; padding: 2px 8px; border-radius: 5px; font-size: 10px; font-weight: bold; }
+        .activity { font-size: 13px; color: #555; line-height: 1.4; margin-top: 5px; }
+        .restaurant-tip { background: #fff9f0; border: 1px dashed var(--action-orange); padding: 8px; margin-top: 8px; border-radius: 8px; font-size: 12px; }
 
-        h1 { text-align: center; color: var(--forest-green); font-size: 24px; margin-bottom: 5px; }
-        .subtitle { text-align: center; font-size: 14px; opacity: 0.8; margin-bottom: 20px; }
+        /* 預算表樣式 */
+        .budget-table { width: 100%; background: white; border-radius: 15px; overflow: hidden; border-collapse: collapse; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .budget-table th { background: var(--forest-green); color: white; padding: 12px; text-align: left; }
+        .budget-table td { padding: 12px; border-bottom: 1px solid #eee; font-size: 13px; }
+        .budget-total { background: #f9f9f9; font-weight: bold; color: var(--forest-green); }
 
-        /* 天氣列表 */
-        .weather-container {
-            background: var(--ocean-blue);
-            color: white;
-            border-radius: 15px;
-            padding: 15px;
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: space-around;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        }
-        .weather-day { font-size: 12px; }
-        .temp { font-size: 16px; font-weight: bold; margin-top: 5px; }
-
-        /* 行程卡片：左圖右文 */
-        .card {
-            background: white;
-            border-radius: 15px;
-            display: flex;
-            margin-bottom: 15px;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            height: 140px;
-        }
-        .card-img {
-            width: 35%;
-            background-size: cover;
-            background-position: center;
-        }
-        .card-content {
-            width: 65%;
-            padding: 12px;
-            overflow-y: auto;
-        }
-        .card-content h2 { margin: 0 0 5px 0; font-size: 16px; color: var(--forest-green); }
-        .card-content p { margin: 0; font-size: 13px; color: #555; }
-        .badge {
-            display: inline-block;
-            background: var(--action-orange);
-            color: white;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-size: 10px;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        /* Checklist 部分 */
-        .checklist-section {
-            background: white;
-            border-radius: 15px;
-            padding: 15px;
-            margin-bottom: 20px;
-        }
-        .checklist-section h2 { font-size: 18px; margin-top: 0; border-bottom: 2px solid var(--beach-sand); padding-bottom: 5px; }
-        .item { display: flex; align-items: center; margin-bottom: 10px; font-size: 14px; }
-        input[type="checkbox"] { margin-right: 10px; width: 18px; height: 18px; }
-
-        /* 住宿建議區 */
-        .hotel-box {
-            background: var(--forest-green);
-            color: white;
-            border-radius: 15px;
-            padding: 15px;
-            margin-bottom: 20px;
-            font-size: 13px;
-        }
-        .hotel-box b { color: var(--ocean-blue); }
-
-        footer { text-align: center; font-size: 12px; opacity: 0.5; padding: 20px; }
+        .info-block { background: var(--night-blue); color: white; border-radius: 15px; padding: 20px; margin-bottom: 15px; }
+        .checklist { background: white; border-radius: 15px; padding: 20px; margin-bottom: 30px; }
     </style>
 </head>
 <body>
 
-    <h1>🌍 2026 歐洲玩樂 App</h1>
-    <p class="subtitle">Party • Beach • Adventure (No Museums!)</p>
+<div class="app-header">
+    <h1>🌍 2026 玩樂至上 App</h1>
+    <p>Eat • Party • Action • Repeat</p>
+</div>
 
-    <div class="weather-container">
-        <div class="weather-day">4/1<br>☀️<div class="temp">18°C</div></div>
-        <div class="weather-day">4/2<br>☀️<div class="temp">20°C</div></div>
-        <div class="weather-day">4/3<br>🌤️<div class="temp">19°C</div></div>
-        <div class="weather-day">4/4<br>☀️<div class="temp">22°C</div></div>
-        <div class="weather-day">4/5<br>☀️<div class="temp">21°C</div></div>
-    </div>
+<div class="section-title">📅 每日行程與神級餐廳</div>
 
-    <div class="card">
-        <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=400');"></div>
-        <div class="card-content">
-            <span class="badge">NIGHTLIFE</span>
-            <h2>4/1 - 4/4 葡萄牙</h2>
-            <p>里斯本 Pink Street 飲酒，波圖 Foz do Douro 睇浪。住 <b>Baixa</b> 區。</p>
+<div class="day-card">
+    <div class="card-left" style="background-image: url('https://images.unsplash.com/photo-1555881400-74d7acaacd8b?w=300');"></div>
+    <div class="card-right">
+        <span class="date-badge">DAY 1-4: 葡萄牙</span>
+        <div class="activity">
+            <b>4/1-2 里斯本:</b> Pink Street 飲酒，住 Baixa。<br>
+            🍴 <b>Time Out Market:</b> 乜嘢都有得食嘅超大型美食廣場。<br>
+            <b>4/3-4 波圖:</b> 睇大西洋日落。<br>
+            🍴 <b>Cantinho do Avillez:</b> 現代葡菜，一定要試佢嘅「海鮮燉飯」。
         </div>
     </div>
+</div>
 
-    <div class="card">
-        <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1533105079780-92b9be482077?w=400');"></div>
-        <div class="card-content">
-            <span class="badge">PARTY</span>
-            <h2>4/5 - 4/9 Ibiza</h2>
-            <p>Pacha 跳舞、Cala Saladeta 曬太陽。住 <b>Playa d'en Bossa</b>。</p>
+<div class="day-card">
+    <div class="card-left" style="background-image: url('https://images.unsplash.com/photo-1533105079780-92b9be482077?w=300');"></div>
+    <div class="card-right">
+        <span class="date-badge">DAY 5-9: IBIZA & FORMENTERA</span>
+        <div class="activity">
+            <b>4/5-7 Ibiza:</b> 超強 Beach Club 體驗。<br>
+            🍴 <b>Nassau Beach Club:</b> 喺沙灘邊飲邊聽 House Music 食地中海菜。<br>
+            <b>4/8-9 Formentera:</b> 坐快船去玩水。<br>
+            🍴 <b>Es Caló:</b> 望住玻璃水食「龍蝦燴飯」。
         </div>
     </div>
+</div>
 
-    <div class="card">
-        <div class="card-img" style="background-image: url('https://images.unsplash
+<div class="day-card">
+    <div class="card-left" style="background-image: url('https://images.unsplash.com/photo-1543783232-f79f0c679b0e?w=300');"></div>
+    <div class="card-right">
+        <span class="date-badge">DAY 10-11: 馬德里</span>
+        <div class="activity">
+            <b>Nightlife:</b> 必去 Teatro Kapital。<br>
+            🍴 <b>Sala de Despiece:</b> 超型「實驗室」風格餐廳，好玩過睇博物館。<br>
+            🍹 <b>Azotea del Círculo:</b> 最好景嘅 Rooftop Bar。
+        </div>
+    </div>
+</div>
+
+<div class="day-card">
+    <div class="card-left" style="background-image: url('https://images.unsplash.com/photo-1533105079780-92b9be482077?w=300');"></div>
+    <div class="card-right">
+        <span class="date-badge">DAY 12-14: 南法</span>
+        <div class="activity">
+            <b>Activities:</b> 摩納哥 F1 體驗 + 尼斯 Parasailing。<br>
+            🍴 <b>Le Plongeoir (Nice):</b> 起喺海中礁石上面嘅餐廳，風景無敵。<br>
+            🍸 <b>Buddha-Bar (Monaco):</b> 奢華東方風酒吧，氣氛一流。
+        </div>
+    </div>
+</div>
+
+<div class="section-title">💰 預算估算 (Budget Table)</div>
+<table class="budget-table">
+    <tr><th>項目 (15日)</th><th>預計開支 (HKD)</th></tr>
+    <tr><td>機票 (來回 + 內陸)</td><td>$12,000</td></tr>
+    <tr><td>住宿 (住得方便)</td><td>$15,000</td></tr>
+    <tr><td>餐飲 (Fine Dining + 酒)</td><td>$10,000</td></tr>
+    <tr><td>Party & Club 門票</td><td>$4,000</td></tr>
+    <tr><td>活動 (F1、飛索、水上活動)</td><td>$5,000</td></tr>
+    <tr class="budget-total"><td>總計 (估算)</td><td>~$46,000</td></tr>
+</table>
+
+<div class="section-title">🎒 出發前 Check!</div>
+<div class="checklist">
+    <input type="checkbox"> <b>已訂位：</b> Le Plongeoir (南法) & Es Caló (Ibiza)<br>
+    <input type="checkbox"> <b>已買飛：</b> Teatro Kapital 門票<br>
+    <input type="checkbox"> <b>已訂車：</b> 摩納哥超跑體驗<br>
+    <input type="checkbox"> <b>已帶：</b> 太陽眼鏡、派對衫、萬能轉插
+</div>
+
+<footer>
+    <p>© 2026 My Adventure | 享受假期，唔好去博物館！</p>
+</footer>
+
+</body>
+</html>
